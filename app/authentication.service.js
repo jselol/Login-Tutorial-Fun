@@ -31,7 +31,8 @@ System.register(['angular2/core', 'angular2/router'], function(exports_1, contex
             exports_1("User", User);
             users = [
                 new User('admin@admin.com', 'adm9'),
-                new User('user1@gmail.com', 'a23')
+                new User('user1@gmail.com', 'a23'),
+                new User('f', 'f')
             ];
             AuthenticationService = (function () {
                 function AuthenticationService(_router) {

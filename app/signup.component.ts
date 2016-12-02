@@ -1,5 +1,7 @@
 import {Component} from 'angular2/core';
-import {AuthenticationService, User} from './authentication.service'
+import {AuthenticationService, User} from './authentication.service';
+import {Router} from 'angular2/router';
+
 
 @Component({
     selector: 'signup-form',
@@ -46,13 +48,14 @@ export class SignupComponent {
     public errorMsg = '';
 
     constructor(
-        private _service:AuthenticationService) {}
+        private _service:AuthenticationService, private _router:Router) {}
 
     signUp() {
         if(this.user.password !== this.user.passwordConfirm){
             alert("incorrect password");
         } else {
-            this._service.createNewUserFromSignUp(this.user.email, this.user.password)
+            this._service.createNewUserFromSignUp(this.user.email, this.user.password);
+            this._router.navigate(['Login']);
         }
 
     }

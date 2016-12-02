@@ -1,4 +1,4 @@
-System.register(['angular2/core', './authentication.service'], function(exports_1, context_1) {
+System.register(['angular2/core', './authentication.service', 'angular2/router'], function(exports_1, context_1) {
     "use strict";
     var __moduleName = context_1 && context_1.id;
     var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
@@ -10,7 +10,7 @@ System.register(['angular2/core', './authentication.service'], function(exports_
     var __metadata = (this && this.__metadata) || function (k, v) {
         if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
     };
-    var core_1, authentication_service_1;
+    var core_1, authentication_service_1, router_1;
     var SignupComponent;
     return {
         setters:[
@@ -19,11 +19,15 @@ System.register(['angular2/core', './authentication.service'], function(exports_
             },
             function (authentication_service_1_1) {
                 authentication_service_1 = authentication_service_1_1;
+            },
+            function (router_1_1) {
+                router_1 = router_1_1;
             }],
         execute: function() {
             SignupComponent = (function () {
-                function SignupComponent(_service) {
+                function SignupComponent(_service, _router) {
                     this._service = _service;
+                    this._router = _router;
                     this.user = new authentication_service_1.User('', '');
                     this.errorMsg = '';
                 }
@@ -33,6 +37,7 @@ System.register(['angular2/core', './authentication.service'], function(exports_
                     }
                     else {
                         this._service.createNewUserFromSignUp(this.user.email, this.user.password);
+                        this._router.navigate(['Login']);
                     }
                 };
                 SignupComponent = __decorate([
@@ -41,7 +46,7 @@ System.register(['angular2/core', './authentication.service'], function(exports_
                         providers: [authentication_service_1.AuthenticationService],
                         template: "\n        <div class=\"container\" >\n            <div class=\"title\">\n                Welcome - Please Register\n            </div>\n            <div class=\"panel-body\">\n                <div class=\"row\">\n                    <div class=\"input-field col s12\">\n                        <input [(ngModel)]=\"user.email\" id=\"email\"\n                            type=\"email\" class=\"validate\">\n                        <label for=\"email\">Email</label>\n                    </div>\n                </div>\n\n                <div class=\"row\">\n                    <div class=\"input-field col s12\">\n                        <input [(ngModel)]=\"user.password\" id=\"password\"\n                            type=\"password\" class=\"validate\">\n                        <label for=\"password\">Password</label>\n                    </div>\n                    <div class=\"input-field col s12\">\n                        <input [(ngModel)]=\"user.passwordConfirm\" id=\"passwordConfirm\"\n                            type=\"password\" class=\"validate\">\n                        <label for=\"password\">Re-enter to confirm password</label>\n                    </div>\n                </div>\n\n                <span>{{errorMsg}}</span>\n                <button (click)=\"signUp()\"\n                    class=\"btn waves-effect waves-light\"\n                    type=\"submit\" name=\"action\">Sign Up</button>\n            </div>\n        </div>\n    \t"
                     }), 
-                    __metadata('design:paramtypes', [authentication_service_1.AuthenticationService])
+                    __metadata('design:paramtypes', [authentication_service_1.AuthenticationService, router_1.Router])
                 ], SignupComponent);
                 return SignupComponent;
             }());
