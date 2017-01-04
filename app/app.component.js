@@ -1,4 +1,4 @@
-System.register(['angular2/core', './signup.component', './login.component', './userschedule.component', 'angular2/router'], function(exports_1, context_1) {
+System.register(['angular2/core', './signup.component', './login.component', './userschedule.component', 'angular2/router', './authentication.service'], function(exports_1, context_1) {
     "use strict";
     var __moduleName = context_1 && context_1.id;
     var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
@@ -10,7 +10,7 @@ System.register(['angular2/core', './signup.component', './login.component', './
     var __metadata = (this && this.__metadata) || function (k, v) {
         if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
     };
-    var core_1, signup_component_1, login_component_1, userschedule_component_1, router_1;
+    var core_1, signup_component_1, login_component_1, userschedule_component_1, router_1, authentication_service_1;
     var AppComponent;
     return {
         setters:[
@@ -28,24 +28,31 @@ System.register(['angular2/core', './signup.component', './login.component', './
             },
             function (router_1_1) {
                 router_1 = router_1_1;
+            },
+            function (authentication_service_1_1) {
+                authentication_service_1 = authentication_service_1_1;
             }],
         execute: function() {
             AppComponent = (function () {
-                function AppComponent() {
+                function AppComponent(_authenticationService, _userSchedule) {
+                    this._authenticationService = _authenticationService;
+                    this._userSchedule = _userSchedule;
+                    this._authenticationService.getAllUsers();
                 }
                 AppComponent = __decorate([
                     core_1.Component({
                         selector: 'my-app',
                         directives: [signup_component_1.SignupComponent, login_component_1.LoginComponent, router_1.ROUTER_DIRECTIVES],
+                        providers: [authentication_service_1.AuthenticationService, userschedule_component_1.UserscheduleComponent],
                         template: "\n            <router-outlet></router-outlet>\n        "
                     }),
                     router_1.RouteConfig([
-                        { path: '/home', name: 'Home', component: signup_component_1.SignupComponent, useAsDefault: true },
+                        { path: '/home', name: 'Home', component: login_component_1.LoginComponent, useAsDefault: true },
                         { path: '/signup', name: 'Signup', component: signup_component_1.SignupComponent },
                         { path: '/login', name: 'Login', component: login_component_1.LoginComponent },
                         { path: '/userschedule', name: 'Userschedule', component: userschedule_component_1.UserscheduleComponent }
                     ]), 
-                    __metadata('design:paramtypes', [])
+                    __metadata('design:paramtypes', [authentication_service_1.AuthenticationService, userschedule_component_1.UserscheduleComponent])
                 ], AppComponent);
                 return AppComponent;
             }());
